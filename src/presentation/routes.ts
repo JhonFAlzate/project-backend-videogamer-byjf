@@ -3,6 +3,7 @@ import { PlayerRoutes } from "./player/route";
 import { UserRoutes } from "./user/userRoutes";
 import { InventoryRoutes } from "./inventory/controller";
 import { ResourcesRouter } from "./resources/route";
+import { ConstructionsRoutes } from "./constructions/route";
 
 export class AppRoutes {
   static get routes(): Router {
@@ -11,7 +12,8 @@ export class AppRoutes {
     router.use("/api/v1/player", PlayerRoutes.routes);
     router.use("/api/v1/user", UserRoutes.routes);
     router.use("/api/v1/inventory", InventoryRoutes.routes)
-    router.use("/api/v1/", ResourcesRouter.routes)
+    router.use("/api/v1/resources", ResourcesRouter.routes)
+    router.use("/api/v1/constructions", ConstructionsRoutes.routes)
 
     return router;
   }

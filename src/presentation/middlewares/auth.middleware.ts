@@ -2,14 +2,21 @@ import { NextFunction, Request, Response } from "express";
 import { JwtAdapter } from "../../config/jwt.adapter";
 import { User } from "../../data";
 
-enum Role {
-  CLIENT = "CLIENT",
-  EMPLOYEE = "EMPLOYEE",
-}
+// enum Role {
+//   CLIENT = "CLIENT",
+//   EMPLOYEE = "EMPLOYEE",
+// }
 
-enum Status {
-  ACTIVE = "ACTIVE",
-  DISABLED = "DISABLED",
+// enum Status {
+//   ACTIVE = "ACTIVE",
+//   DISABLED = "DISABLED",
+// }
+
+enum roleClan {
+  MASTER = "MASTRER",
+  OFFICER = "OFFICER",
+  SUBOFFICER = "SUBOFFICER",
+  MEMBER = "MEMBER"
 }
 
 export class AuthMiddleware {
@@ -31,8 +38,6 @@ export class AuthMiddleware {
       const user = await User.findOne({
         where: {
           id: payload.id,
-        //   status: Status.ACTIVE,
-        //   emailValidated: true,
         },
       });
       if (!user) return res.status(401).json({ messasge: "Invalid user" });

@@ -10,7 +10,7 @@ export class PlayerController {
 
   constructor(
     private readonly playerService: PlayerService,
-    private readonly inventoryService: InventoryService
+    private readonly inventoryService: InventoryService 
   ){}
 
   private handleError = (error: unknown, res: Response) => {

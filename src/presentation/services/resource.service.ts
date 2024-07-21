@@ -5,7 +5,7 @@ import { CreateResoucesDTO } from "../../domain/dtos/resources/create-resources.
 
 
 export class ResourceService {
-
+//----------------------------------------------------------------------
     async findOneResourceById(id: number){
         const resource = await Resource.findOne({
             where: {
@@ -17,7 +17,7 @@ export class ResourceService {
 
         return resource;
     }
-
+//--------------------------------------------------------------------------------------
     async findOneResourceByname(name: string){
         const resources = await Resource.findOne({
             where: {
@@ -27,7 +27,7 @@ export class ResourceService {
         if(resources) throw CustomError.badRequest('This name is already existing')
         return resources
     }
-
+//----------------------------------------------------------------------------------------------------------
     async createResources(createResoucesDTO: CreateResoucesDTO){
 
         const resourceExisting = await this.findOneResourceByname(CreateResoucesDTO.name)
@@ -46,4 +46,11 @@ export class ResourceService {
         }
 
     }
+//-------------------------------------------------------------------------------------
+    async findAllResources() {
+        const resource = await Resource.find()
+        return resource
+    }
+
+//-------------------------------------------------------------------------------------
 }

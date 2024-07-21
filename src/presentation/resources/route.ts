@@ -13,7 +13,8 @@ export class ResourcesRouter {
         const resourcesController = new ResoucesController(resourcesService);
 
 
-        router.post('/resources', resourcesController.createResources)
+        router.post('/', resourcesController.createResources)
+        router.get('/', resourcesController.getAllResouces)
 
         return router
     }

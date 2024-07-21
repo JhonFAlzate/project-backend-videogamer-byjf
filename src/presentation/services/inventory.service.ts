@@ -126,7 +126,8 @@ async findOneInventoryByPlayerId2(playerId: number){
 
 }
 
-//--------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
+
   async createInventory(playerId: number){
     const player = await Player.findOne({
       where: {
@@ -147,6 +148,8 @@ async findOneInventoryByPlayerId2(playerId: number){
   }
 
   //---------------------------------------------------------------------------------------
+
+
 
  async findInventoryPlayerId(playerId: number){
 

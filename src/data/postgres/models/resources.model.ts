@@ -7,6 +7,7 @@ import { Inventory_resource } from './inventoryResource.model';
 
 @Entity()
 export class Resource extends BaseEntity {
+  
   @PrimaryGeneratedColumn()
   id: number;
 

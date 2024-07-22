@@ -17,7 +17,7 @@ export class Inventory extends BaseEntity {
   player: Player;
   
   @OneToMany(() => Inventory_resource, (inventory_resource) => inventory_resource.inventory )
-  inventory: Inventory_resource[];
+  inventory_resource: Inventory_resource[];
 
   @OneToMany(() => Inventory_item, (inventory_item) => inventory_item.inventory)
   inventory_item: Inventory_item[];

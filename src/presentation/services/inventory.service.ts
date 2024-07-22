@@ -161,13 +161,13 @@ async findOneInventoryByPlayerId2(playerId: number){
       where: {
        id: inventory2.id,
       },
-      relations: ['inventory_item', 'inventory'],
+      relations: ['inventory_item', 'inventory_resource'],
       select: {
         inventory_item: {
           id: true,
           quantity: true,
         },
-        inventory: {
+        inventory_resource: {
           id: true,
           quantity: true
         }

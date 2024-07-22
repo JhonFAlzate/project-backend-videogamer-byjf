@@ -1,5 +1,6 @@
-import { ClanMember, ClanMemberRole } from '../../data';
+import { ClanMember, ClanMemberRole, Clans } from '../../data';
 import { CustomError, JoinMember } from '../../domain';
+import { AddClansDto } from '../../domain/dtos/clan/add-clans.dto';
 import { PlayerService } from './player.service';
 
 
@@ -34,5 +35,32 @@ export class ClanService {
       throw CustomError.internalServer("Something went wrong")
     }
   }
+
+  async createClan(addClanDto: AddClansDto){
+    const clanExisting = await this.finClanByname(addClanDto.name)
+    if(clanExisting) throw CustomError.badRequest("name of clan existing...✕✕✕")
+
+    const clan = new Clans();
+    clan.name = addClanDto.name.toLocaleLowerCase().trim();
+    clan.description = addClanDto.description.toLocaleLowerCase().trim();
+
+    try {
+      return await clan.save()
+      
+  } catch (error) {
+      throw CustomError.internalServer("Something went wrong...")
+  }
+   
+  }
+
+  async finClanByname(name: string){
+    const clan = await Clans.findOne({
+        where: {
+            name,
+        }
+    })
+    if(clan) throw CustomError.badRequest('This name is already existing')
+    return clan
+}
 
 }

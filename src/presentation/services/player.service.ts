@@ -1,13 +1,14 @@
 import { Player } from '../../data';
 import { CreatePlayerDTO, CustomError } from '../../domain';
+import { ConstructionsService } from './constructions.service';
 import { UserService } from './user.service';
 
 
 
 export class PlayerService {
-
   constructor(
     private readonly userService: UserService
+  
   ){}
 
   //----------------------------------------------------------------------------
@@ -66,5 +67,27 @@ export class PlayerService {
   }
 //----------------------------------------------------------------------------------------------
 
+async findPlayerConstructionsById(id: number){
+ 
+
+  const player = await Player.findOne({
+    where: {
+      id
+    },
+    relations: ['constructions'],
+    select: {
+      constructions: {
+        id: true,
+        name: true,
+        type: true,
+        level: true,
+      }
+    }
+  })
+
+  if (!player) throw CustomError.notFound("Player not found")
+
+  return player;
+}
 
 }

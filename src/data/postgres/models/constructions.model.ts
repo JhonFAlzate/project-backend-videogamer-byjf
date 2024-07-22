@@ -18,7 +18,7 @@ export class Construction extends BaseEntity {
   @Column("varchar", {
     length: 255,
     nullable: false,
-    unique: true,
+    
   })
   name: string;
   

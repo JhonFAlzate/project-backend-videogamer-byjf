@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { AddItemToIventory, CreatePlayerDTO, CustomError } from '../../domain';
 import { PlayerService } from '../services/player.service';
 import { InventoryService } from '../services/inventory.service';
+import { ConstructionsService } from '../services/constructions.service';
 
 
 
@@ -10,7 +11,8 @@ export class PlayerController {
 
   constructor(
     private readonly playerService: PlayerService,
-    private readonly inventoryService: InventoryService 
+    private readonly inventoryService: InventoryService,
+  
   ){}
 
   private handleError = (error: unknown, res: Response) => {
@@ -67,6 +69,23 @@ getPlayerInventoryById = (req: Request, res: Response) => {
   }
   this.inventoryService.findInventoryPlayerId(+id)
   .then((invent) => res.status(200).json(invent))
+  .catch((error: any) =>  {
+    if (error instanceof CustomError) {
+      return res.status(error.statusCode).json({message: error.message})
+    }
+    return this.handleError(error, res);
+  })
+  
+}
+
+getPlayerConstructionsById = (req: Request, res: Response) => {
+  const {id} = req.params;
+
+  if(isNaN(+id)){
+    return res.status(400).json({message: "El id debe ser un número"})
+  }
+  this.playerService.findPlayerConstructionsById(+id)
+  .then((constructions) => res.status(200).json(constructions))
   .catch((error: any) =>  {
     if (error instanceof CustomError) {
       return res.status(error.statusCode).json({message: error.message})

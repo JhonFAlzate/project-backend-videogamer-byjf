@@ -155,9 +155,7 @@ async findOneInventoryByPlayerId2(playerId: number){
 
   const inventory2 = await this.findOneInventoryByPlayerId2(playerId) 
  
-  console.log(inventory2.id)
-
-  if(!inventory2) return CustomError.notFound("Jugador no existe")
+   if(!inventory2) return CustomError.notFound("player not existing")
     
     const inventoryOfPlayer = await Inventory.findOne({
       where: {
@@ -179,11 +177,12 @@ async findOneInventoryByPlayerId2(playerId: number){
    
 
     if(!inventoryOfPlayer) {
-    throw CustomError.notFound("player no tiene inventario aún");
+    throw CustomError.notFound("player not inventories");
     }  
 
     return inventoryOfPlayer;
 
   }
+  
 
 }

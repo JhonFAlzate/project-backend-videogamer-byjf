@@ -1,4 +1,4 @@
-import { Construction } from "../../data";
+import { Construction, Player } from "../../data";
 import { CustomError } from "../../domain";
 import { AddConstructionsDto } from "../../domain/dtos/constructions/add-constructions.dto";
 import { PlayerService } from "./player.service";
@@ -17,7 +17,7 @@ export class ConstructionsService {
         
         if(!player) throw CustomError.internalServer('Player not existing')
 
-            console.log(player)
+            
         constructions.name = createConstructionsDto.name.toLocaleLowerCase().trim();
         constructions.type = createConstructionsDto.type.toLocaleLowerCase().trim();
         constructions.location = createConstructionsDto.location.toLocaleLowerCase().trim();
@@ -29,6 +29,27 @@ export class ConstructionsService {
         } catch (error) {
             throw CustomError.internalServer("Something went wrong...")
         }
+    }
+
+//------------------------------------------------------------------------------------------
+    
+    async findConstructionsPlayerById(playerId: number){
+        // const playerExisting = await this.playerService.findOnePlayer(playerId);
+       
+        // if(!playerExisting) return CustomError.notFound("Player not Existing");
+       
+        const existing = await Construction.findOne({
+            where: {
+                id: playerId
+            }
+            
+        });
+        
+        if(!existing) {
+            throw CustomError.notFound("player not constructions")
+        }
+       
+
     }
 
 

@@ -8,6 +8,7 @@ import { AuthMiddleware } from '../middlewares/auth.middleware';
 import { InventoryService } from '../services/inventory.service';
 import { ResourceService } from '../services/resource.service';
 import { ItemService } from '../services/item.service';
+import { ConstructionsService } from '../services/constructions.service';
 
 
 export class PlayerRoutes {
@@ -28,6 +29,7 @@ router.use(AuthMiddleware.protect);
     router.get('/:id', playerController.findOnePlayer)
     router.post('/:id/inventory/items', playerController.addItemToInventory)
     router.get('/:id/inventory', playerController.getPlayerInventoryById)
+    router.get('/:id/constructions', playerController.getPlayerConstructionsById)
 
     return router;
   }

@@ -1,9 +1,6 @@
-
-import { Router } from 'express';
-
+import { Router } from "express";
 
 export class InventoryRoutes {
-  
   static get routes(): Router {
     const router = Router();
 
@@ -11,6 +8,4 @@ export class InventoryRoutes {
 
     return router;
   }
-
 }
-

@@ -9,7 +9,6 @@ export class UserService {
 
   //----------------------------------------------------------------------
   async register(createUserDto: CreateUserDto) {
-
     const existUser = await User.findOne({
       where: {
         email: createUserDto.email,
@@ -32,45 +31,44 @@ export class UserService {
 
   //----------------------------------------------------------------------
 
-  public async login (loginUserDto: LoginUserDTO){
+  public async login(loginUserDto: LoginUserDTO) {
     const user = await User.findOne({
       where: {
         email: loginUserDto.email,
       },
-    })
+    });
     if (!user) throw CustomError.unAuthorized("Invalid credentials 11");
 
-    const istMatching = bcryptAdapter.compare( loginUserDto.password, user.password );
+    const istMatching = bcryptAdapter.compare(
+      loginUserDto.password,
+      user.password
+    );
     if (!istMatching) throw CustomError.unAuthorized("Invalid password");
 
-    const token = await JwtAdapter.generateToken({id: user.id})
-    if (!token) throw CustomError.internalServer("Error while creating JWT -- 😵‍💫")
+    const token = await JwtAdapter.generateToken({ id: user.id });
+    if (!token)
+      throw CustomError.internalServer("Error while creating JWT -- 😵‍💫");
 
     return {
       token: token,
       user: {
         id: user.id,
         username: user.username,
-        email: user.email
+        email: user.email,
       },
-    }
+    };
   }
 
-//----------------------------------------------------------------------
-  async findeOneUser(id: number){
-   
-        const user = await User.findOne({
-            where :{
-                id
-            },
-            relations: ['players'],
-        })
-        if (!user) throw CustomError.notFound("User not found")
+  //----------------------------------------------------------------------
+  async findeOneUser(id: number) {
+    const user = await User.findOne({
+      where: {
+        id,
+      },
+      relations: ["players"],
+    });
+    if (!user) throw CustomError.notFound("User not found");
 
-        return user;
-        }
-
-
-
-        
+    return user;
+  }
 }

@@ -1,14 +1,10 @@
-
-
-import { Router } from 'express';
-import { ClanController } from './controller';
-import { ClanService } from '../services/clan.service';
-import { PlayerService } from '../services/player.service';
-import { UserService } from '../services/user.service';
-
+import { Router } from "express";
+import { ClanController } from "./controller";
+import { ClanService } from "../services/clan.service";
+import { PlayerService } from "../services/player.service";
+import { UserService } from "../services/user.service";
 
 export class ClanRoutes {
-  
   static get routes(): Router {
     const router = Router();
 
@@ -17,12 +13,10 @@ export class ClanRoutes {
     const clanService = new ClanService(playerService);
     const controller = new ClanController(clanService);
 
-    router.post('/:playerReceiverId/join', controller.addMemberToClan)
-    router.post('/', controller.createClan)
-    router.get('/:id/members', controller.getClanMembersById)
+    router.post("/:playerReceiverId/join", controller.addMemberToClan);
+    router.post("/", controller.createClan);
+    router.get("/:id/members", controller.getClanMembersById);
 
     return router;
   }
-
 }
-

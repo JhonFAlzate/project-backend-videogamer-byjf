@@ -16,11 +16,10 @@ enum roleClan {
   MASTER = "MASTRER",
   OFFICER = "OFFICER",
   SUBOFFICER = "SUBOFFICER",
-  MEMBER = "MEMBER"
+  MEMBER = "MEMBER",
 }
 
 export class AuthMiddleware {
-
   static async protect(req: Request, res: Response, next: NextFunction) {
     const authorization = req.header("Authorization");
 

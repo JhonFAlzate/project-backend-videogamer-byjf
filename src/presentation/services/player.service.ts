@@ -89,5 +89,21 @@ async findPlayerConstructionsById(id: number){
 
   return player;
 }
+//-------------------------------------------------------------------------------
+async findOnePlayerQuestById(id: number){
+  const player = await Player.findOne({
+    where: {
+      id
+    },
+    relations: {
+       quest_players:{
+        quest:true
+       }
+    }
+  })
 
+  if (!player) throw CustomError.notFound("Player not found")
+
+  return player;
+}
 }

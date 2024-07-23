@@ -5,6 +5,7 @@ import { InventoryRoutes } from "./inventory/controller";
 import { ResourcesRouter } from "./resources/route";
 import { ConstructionsRoutes } from "./constructions/route";
 import { ClanRoutes } from "./clan/route";
+import { QuestRoutes } from "./quest/routes";
 
 export class AppRoutes {
   static get routes(): Router {
@@ -16,6 +17,7 @@ export class AppRoutes {
     router.use("/api/v1/resources", ResourcesRouter.routes)
     router.use("/api/v1/constructions", ConstructionsRoutes.routes)
     router.use("/api/v1/clan", ClanRoutes.routes)
+    router.use("/api/v1/quest", QuestRoutes.routes)
 
     return router;
   }

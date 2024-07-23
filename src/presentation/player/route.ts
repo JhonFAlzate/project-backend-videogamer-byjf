@@ -30,6 +30,7 @@ router.use(AuthMiddleware.protect);
     router.post('/:id/inventory/items', playerController.addItemToInventory)
     router.get('/:id/inventory', playerController.getPlayerInventoryById)
     router.get('/:id/constructions', playerController.getPlayerConstructionsById)
+    router.get('/:id/quests', playerController.findOnePlayerQuestById)
 
     return router;
   }

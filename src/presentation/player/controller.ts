@@ -95,4 +95,20 @@ getPlayerConstructionsById = (req: Request, res: Response) => {
   
 }
 
+findOnePlayerQuestById = (req: Request, res: Response) => {
+  const {id} = req.params;
+
+  if(isNaN(+id)){
+    return res.status(400).json({message: "El id debe ser un número"})
+  }
+  this.playerService.findOnePlayerQuestById(+id)
+  .then((quest) => res.status(200).json(quest))
+  .catch((error: any) =>  {
+    if (error instanceof CustomError) {
+      return res.status(error.statusCode).json({message: error.message})
+    }
+    return this.handleError(error, res);
+  })
+}
+
 }

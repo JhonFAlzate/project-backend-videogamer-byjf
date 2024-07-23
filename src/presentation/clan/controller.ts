@@ -32,7 +32,7 @@ export class ClanController {
       .catch(error => this.handleError(error, res))
     
   }
-
+//------------------------------------------------------------------
  createClan = async (req: Request, res: Response) => {
   const[error, createClanDto] = AddClansDto.create(req.body)
   if (error) return res.status(422).json({message: error})
@@ -41,6 +41,22 @@ export class ClanController {
     .then( clan => res.status(201).json(clan))
     .catch(error => this.handleError(error, res))  
   
+  }
+
+  getClanMembersById = async (req: Request, res: Response) => {
+    const {id} = req.params;
+    console.log(id)
+    if (isNaN(+id)) {
+      return res.status(400).json({message: "El id debe ser un número"})
+    }
+    this.clanService.findClanMembersById(+id)
+    .then((member) => res.status(200).json(member))
+    .catch((error: any) =>  {
+      if (error instanceof CustomError) {
+        return res.status(error.statusCode).json({message: error.message})
+      }
+      return this.handleError(error, res);
+    })
   }
 
 }

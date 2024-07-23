@@ -31,7 +31,7 @@ export class ResoucesController {
 
     getAllResouces = async (req: Request, res: Response) => {
         this.resourcesService.findAllResources()
-        .then((repair) => res.status(200).json(repair))
+        .then((resources) => res.status(200).json(resources))
         .catch((error: unknown) => this.handleError(error, res));
     }
 

@@ -23,13 +23,13 @@ export enum ClanMemberRole {
 export class ClanMember extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
-
+  
   @ManyToOne(() => Player, (player) => player.clanMembers)
   player: Player;
-
+  
   @ManyToOne(() => Clans, (clans) => clans.clanMembers)
-  clans: Clans;
-
+  clan: Clans;
+  
   @Column({
     type: 'enum',
     enum: ClanMemberRole,
@@ -39,7 +39,8 @@ export class ClanMember extends BaseEntity {
 
   @CreateDateColumn()
   created_at: Date;
-
+  
   @UpdateDateColumn()
   updated_at: Date;
 }
+

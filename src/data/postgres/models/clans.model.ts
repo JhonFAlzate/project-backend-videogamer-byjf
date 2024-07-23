@@ -17,7 +17,7 @@ export class Clans extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToMany(() => ClanMember, (clanMembers) => clanMembers.clans)
+  @OneToMany(() => ClanMember, (clanMembers) => clanMembers.clan)
   clanMembers: ClanMember[];
 
   @Column("varchar", {

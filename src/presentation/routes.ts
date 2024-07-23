@@ -15,7 +15,7 @@ export class AppRoutes {
     router.use("/api/v1/inventory", InventoryRoutes.routes)
     router.use("/api/v1/resources", ResourcesRouter.routes)
     router.use("/api/v1/constructions", ConstructionsRoutes.routes)
-    router.use("/api/v1", ClanRoutes.routes)
+    router.use("/api/v1/clan", ClanRoutes.routes)
 
     return router;
   }

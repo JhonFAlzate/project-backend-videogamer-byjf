@@ -186,3 +186,11 @@ async findOneInventoryByPlayerId2(playerId: number){
   
 
 }
+
+// relations:{
+//   inventory:{
+//     inventory_resource: true,
+//     inventory_items: true,
+
+//   },
+// },

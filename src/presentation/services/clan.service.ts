@@ -11,7 +11,9 @@ export class ClanService {
   ){}
 
   async addMemberToClan(playerReceiverId: number, joinMemberDTO: JoinMember){
+
     const playerReceiverPromise = this.playerService.findOnePlayer(playerReceiverId);
+
     const playerSenderPromise = this.playerService.findOnePlayer(joinMemberDTO.senderMemberId)
 
     const [playerReceiver, playerSender] = await Promise.all([playerReceiverPromise, playerSenderPromise])
@@ -27,7 +29,7 @@ export class ClanService {
     
     const clanMember = new ClanMember();
     clanMember.player = playerReceiver;
-    clanMember.clans = playerSender.clanMembers[0].clans;
+    clanMember.clan = playerSender.clanMembers[0].clan;
 
     try {
       return await clanMember.save()
@@ -35,6 +37,7 @@ export class ClanService {
       throw CustomError.internalServer("Something went wrong")
     }
   }
+//-------------------------------------------------------------------------------------------------------------------
 
   async createClan(addClanDto: AddClansDto){
     const clanExisting = await this.finClanByname(addClanDto.name)
@@ -62,5 +65,26 @@ export class ClanService {
     if(clan) throw CustomError.badRequest('This name is already existing')
     return clan
 }
+
+//--------------------------------------------------------------------------------------------
+async findClanMembersById(id:number){
+  const clan = await Clans.findOne({
+      where: {
+         id 
+      },
+       relations:{
+        clanMembers: {
+          player: true
+        }
+       },
+   
+     
+  })
+
+  console.log(clan)
+  if(!clan) throw CustomError.badRequest('This clan not existing')
+  return clan
+}
+//-----------------------------------------------------------------------------------------------
 
 }

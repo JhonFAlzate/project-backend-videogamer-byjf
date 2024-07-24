@@ -18,10 +18,11 @@ export class UserController {
   findOneUser = async (req: Request, res: Response) => {
     const { id } = req.params;
 
-    this.userService
-      .findeOneUser(+id)
-      .then((user) => res.status(200).json(user))
-      .catch((error) => this.handleError(error, res));
+    this.userService.findeOneUser(+id)
+    
+    .then((user) => res.status(200).json(user))
+    .catch((error) => this.handleError(error, res));
+    
   };
 
   registerUser = (req: Request, res: Response) => {

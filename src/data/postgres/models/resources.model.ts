@@ -18,6 +18,7 @@ export class Resource extends BaseEntity {
   @Column("varchar", {
     length: 100,
     nullable: false,
+    unique: true,
   })
   name: string;
 

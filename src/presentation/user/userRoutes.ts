@@ -13,7 +13,7 @@ export class UserRoutes {
     router.post("/register", userController.registerUser);
     router.post("/login", userController.login);
 
-    // router.use(AuthMiddleware.protect);
+    router.use(AuthMiddleware.protect);
 
     router.get("/:id", userController.findOneUser);
 

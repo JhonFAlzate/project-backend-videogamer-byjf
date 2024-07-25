@@ -4,7 +4,7 @@ import { ResourceService } from "../services/resource.service";
 
 export class ResoucesController {
   constructor(
-    //Dependency injection
+   
     private readonly resourcesService: ResourceService
   ) {}
 

@@ -25,7 +25,7 @@ export class PlayerController {
     if (error) return res.status(422).json({ message: error });
 
     console.log(req.body.sessionUser.id);
-    const sessionUserId = req.body.sessionUser.id; // esto lo deberan sacar de la req.body.sessionUser
+    const sessionUserId = req.body.sessionUser.id; 
 
     this.playerService
       .createPlayer(createPlayerDTO!, sessionUserId)
@@ -45,7 +45,7 @@ export class PlayerController {
   };
 
   addItemToInventory = async (req: Request, res: Response) => {
-    const { id: playerId } = req.params; //id del player
+    const { id: playerId } = req.params; 
     const [error, addItemToIventoryDTO] = AddItemToIventory.create(req.body);
     if (error) return res.status(422).json({ message: error });
 

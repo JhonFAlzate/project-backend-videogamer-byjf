@@ -8,9 +8,8 @@ export class PlayerService {
 
   //----------------------------------------------------------------------------
   async createPlayer(createPlayerDTO: CreatePlayerDTO, userId: number) {
-    // busquen el usuario y verificar que exista
     const userPromise = this.userService.findeOneUser(userId);
-    // verificar que no exista un jugador con ese nombre
+
     const playerPromise = this.findOnePlayerByName(createPlayerDTO.name);
 
     const [userData, playerData] = await Promise.all([
@@ -29,7 +28,7 @@ export class PlayerService {
       throw CustomError.internalServer("Something went wrong");
     }
   }
-  //------------------------------------------------------------------------------------------
+  //-------------------------------------------------------------------------------------------
   async findOnePlayer(id: number) {
     const player = await Player.findOne({
       where: {

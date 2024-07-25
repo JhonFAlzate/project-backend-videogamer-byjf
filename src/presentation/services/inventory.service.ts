@@ -151,16 +151,14 @@ export class InventoryService {
       where: {
         id: inventory2.id,
       },
-      relations: ["inventory_item", "inventory_resource"],
-      select: {
+      relations: {
         inventory_item: {
-          id: true,
-          quantity: true,
+          item:true,
         },
-        inventory_resource: {
-          id: true,
-          quantity: true,
+        inventory_resource:{
+          resource: true,
         },
+        
       },
     });
 
